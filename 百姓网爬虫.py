@@ -2,10 +2,10 @@ import requests
 import time
 from bs4 import BeautifulSoup as bs
 
-url='https://'+input('输入网址')+'/search/?query=%E5%8F%91%E7%94%B5%E6%9C%BA%E7%A7%9F%E8%B5%81'
+geturl=input('输入网址')
 def main():
     for i in range(50):
-        url='https://donghai.baixing.com/search/?page='+str(i)+'&query=%E5%8F%91%E7%94%B5%E6%9C%BA%E7%A7%9F%E8%B5%81'
+        url='https://'+geturl+'/search/?page='+str(i)+'&query=%E5%8F%91%E7%94%B5%E6%9C%BA%E7%A7%9F%E8%B5%81'
         infoList=getDetails(url)
         with open('./'+time.strftime("%Y-%m-%d %H.%M.%S", time.localtime())+'.txt','w') as output:
             for i in infoList:
@@ -17,7 +17,6 @@ def getDetails(url):
       'User-Agent':'Mozilla/5.0 (Windows NT 5.1) AppleWebKit/534.25 (KHTML, like Gecko) Chrome/12.0.706.0 Safari/534.25',
       'Referer':'https://baixing.com/'
       }
-    url='https://nanjing.baixing.com/search/?query=%E5%8F%91%E7%94%B5%E6%9C%BA%E7%A7%9F%E8%B5%81'
     req=requests.get(url,headers=headers)
     # print(req.text)
     req=bs(req.text,'html.parser')
